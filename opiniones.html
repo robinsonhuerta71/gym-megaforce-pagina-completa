@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones - Gym Megaforce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --color-background: #121212;
+            --color-surface: #1E1E1E;
+            --color-primary: #FFD700;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #AAAAAA;
+            --color-border: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .navbar { background-color: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 1rem 0; }
+        .navbar .nav-link { font-weight: 600; color: var(--color-text-secondary); transition: color 0.3s ease; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--color-text-primary) !important; }
+
+        .btn { padding: 10px 22px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; text-align: center; }
+        .btn-primary { background-color: var(--color-primary); color: var(--color-background); border: 1px solid var(--color-primary); }
+        .btn-primary:hover { filter: brightness(1.1); transform: scale(1.05); }
+        .btn-secondary { background-color: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); }
+        .btn-secondary:hover { background-color: var(--color-primary); color: var(--color-background); }
+
+        .footer { background-color: var(--color-surface); padding: 50px 5%; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h4 { margin-bottom: 20px; text-transform: uppercase; color: var(--color-primary); font-weight: 700; }
+        .app-download { display: flex; align-items: center; gap: 20px; }
+        .qr-code img { width: 100px; height: 100px; border-radius: 8px; }
+        .app-stores a { display: block; margin-bottom: 10px; }
+        .app-stores img { height: 40px; width: auto; transition: opacity 0.3s ease; }
+        .app-stores img:hover { opacity: 0.8; }
+        .social-links a { color: var(--color-text-primary); font-size: 1.8rem; margin-right: 15px; transition: color 0.3s ease; display: inline-block; }
+        .social-links a:hover { color: var(--color-primary); animation: bounce 0.8s ease; }
+        .contact-info p { margin-bottom: 10px; color: var(--color-text-secondary); line-height: 1.6; display: flex; align-items: center; gap: 10px; }
+
+        .reviews-banner {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .reviews-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            animation: zoomIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .review-card:nth-child(2) { animation-delay: 0.1s; }
+        .review-card:nth-child(3) { animation-delay: 0.2s; }
+        .review-card:nth-child(4) { animation-delay: 0.3s; }
+        .review-card:nth-child(5) { animation-delay: 0.4s; }
+        .review-card:nth-child(6) { animation-delay: 0.5s; }
+
+        .review-stars {
+            color: var(--color-primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        .review-stars .fa-regular {
+            color: var(--color-text-secondary);
+            animation: none;
+        }
+
+        .review-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-transform: none;
+            font-weight: 600;
+        }
+
+        .review-card p {
+            color: var(--color-text-secondary);
+            margin-bottom: 25px;
+            flex-grow: 1; 
+            line-height: 1.7;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto; 
+        }
+
+        .reviewer img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-info span {
+            display: block;
+        }
+
+        .reviewer-info .name {
+            font-weight: 600;
+        }
+
+        .reviewer-info .date {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .leave-review-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .modal-content {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--color-border);
+        }
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        .modal-body .form-label {
+            color: var(--color-text-secondary);
+        }
+        .modal-body .form-control {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+        }
+        .modal-body .form-control:focus {
+            background-color: var(--color-background);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            color: var(--color-text-primary);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes shine { 0%, 100% { text-shadow: 0 0 5px var(--color-primary); } 50% { text-shadow: 0 0 20px var(--color-primary); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+
+        @media (max-width: 992px) {
+            .footer { flex-direction: column; text-align: center; }
+            .footer-col { width: 100%; max-width: 400px; margin: 0 auto; }
+            .app-download, .social-links, .contact-info { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .reviews-banner h1 { font-size: 2.5rem; }
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="image/logo.png" alt="Logo Megaforce" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="entrenamiento.html">Entrenamiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="instalaciones.html">Instalaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="nutricion.html">Nutrición</a></li>
+                        <li class="nav-item"><a class="nav-link" href="equipamiento.html">Equipamiento</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="inscribirse.html" class="btn btn-primary me-2">Inscribirse</a>
+                        <a href="acceder.html" class="btn btn-secondary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="reviews-banner">
+            <h1>Nuestra Comunidad Opina</h1>
+        </section>
+
+        <section class="container">
+            <div class="reviews-grid">
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>¡El mejor gimnasio de la ciudad!</h3>
+                    <p>Las instalaciones son impecables, las máquinas son modernas y los entrenadores están siempre dispuestos a ayudar. He visto más progreso aquí en 3 meses que en un año en otros lugares.</p>
+                    <div class="reviewer">
+                        <img src="image/1723806278854-output.jpg" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Lucía Ramos</span>
+                            <span class="date">05 de Julio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Buen ambiente y excelentes clases</h3>
+                    <p>Me encantan las clases de cycling y funcional. Los instructores tienen una energía increíble que te motiva a darlo todo. El ambiente es súper amigable y respetuoso.</p>
+                    <div class="reviewer">
+                        <img src="image/1727124002941-9215b770-cb0a-4d8e-85ef-0bf516222404.webp" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Javier Gómez</span>
+                            <span class="date">28 de Junio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Resultados que se notan</h3>
+                    <p>El plan de nutrición combinado con la rutina personalizada que me dieron ha sido un cambio total. El seguimiento es constante y profesional. ¡Totalmente recomendado!</p>
+                    <div class="reviewer">
+                        <img src="image/1738786195346-be8ed32d-1cd9-4b80-90ff-afac61e094ec.webp" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Valeria Morales</span>
+                            <span class="date">25 de Junio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Limpieza y orden de 10</h3>
+                    <p>Da gusto entrenar en un lugar tan limpio y ordenado. Siempre hay personal de limpieza y todo el equipamiento está en perfecto estado. Se nota la preocupación por los detalles.</p>
+                    <div class="reviewer">
+                        <img src="image/1738785746525-29f20315-683a-4c40-806c-3ce6c9093121.webp" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Carlos Soto</span>
+                            <span class="date">18 de Junio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <h3>Muy completo</h3>
+                    <p>Tienen de todo: zona de musculación, cardio, clases grupales y hasta sauna. El plan multisede es genial porque puedo ir al que me quede más cerca según el día. Muy buena opción.</p>
+                    <div class="reviewer">
+                        <img src="image/Cannelle-Sanz-perfil.jpg" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Ana Paredes</span>
+                            <span class="date">12 de Junio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>La mejor inversión en mi salud</h3>
+                    <p>Al principio dudaba por el precio, pero cada sol lo vale. La calidad del servicio, el equipamiento y la atención personalizada no tienen comparación. Es más que un gimnasio, es una comunidad.</p>
+                    <div class="reviewer">
+                        <img src="image/perfil-hombre-vivo.png" alt="Foto de reviewer">
+                        <div class="reviewer-info">
+                            <span class="name">Marco Aguilar</span>
+                            <span class="date">10 de Junio, 2024</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="leave-review-section">
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                    Deja tu propia reseña
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-col">
+            <h4>Descarga la App</h4>
+            <div class="app-download">
+                <div class="qr-code">
+                    <img src="image/qrdescarga.png" alt="QR Code para descargar la app">
+                </div>
+                <div class="app-stores">
+                    <a href="#"><img src="image/Google_Play_Store_badge_EN.svg.webp" alt="Disponible en Google Play"></a>
+                    <a href="#"><img src="image/AppStore.png" alt="Descargar en el App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Av. Principal 123, Lima, Perú</p>
+                <p><i class="fas fa-envelope"></i> Email: info@gymmegaforce.com.pe</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +51 123 456 789</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Comparte tu experiencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="reviewer-name" class="form-label">Tu Nombre</label>
+                            <input type="text" class="form-control" id="reviewer-name" placeholder="Ej: Juan Pérez">
+                        </div>
+                        <div class="mb-3">
+                            <label for="review-rating" class="form-label">Tu Valoración (de 1 a 5)</label>
+                            <select class="form-select" id="review-rating" style="background-color: var(--color-background); border-color: var(--color-border); color: var(--color-text-primary);">
+                                <option>5 - Excelente</option>
+                                <option>4 - Muy Bueno</option>
+                                <option>3 - Bueno</option>
+                                <option>2 - Regular</option>
+                                <option>1 - Malo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="review-text" class="form-label">Tu Reseña</label>
+                            <textarea class="form-control" id="review-text" rows="4" placeholder="Escribe aquí lo que más te gustó..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--color-border);">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Enviar Reseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

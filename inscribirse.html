@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscribirse - Gym Megaforce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --color-background: #121212;
+            --color-surface: #1E1E1E;
+            --color-primary: #FFD700;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #AAAAAA;
+            --color-border: #333333;
+            --color-danger: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .navbar { background-color: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 1rem 0; }
+        .navbar .nav-link { font-weight: 600; color: var(--color-text-secondary); transition: color 0.3s ease; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--color-text-primary) !important; }
+
+        .btn { padding: 10px 22px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; text-align: center; }
+        .btn-primary { background-color: var(--color-primary); color: var(--color-background); border: 1px solid var(--color-primary); }
+        .btn-primary:hover { filter: brightness(1.1); transform: scale(1.05); }
+        .btn-secondary { background-color: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); }
+        .btn-secondary:hover { background-color: var(--color-primary); color: var(--color-background); }
+
+        .footer { background-color: var(--color-surface); padding: 50px 5%; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h4 { margin-bottom: 20px; text-transform: uppercase; color: var(--color-primary); font-weight: 700; }
+        .app-download { display: flex; align-items: center; gap: 20px; }
+        .qr-code img { width: 100px; height: 100px; border-radius: 8px; }
+        .app-stores a { display: block; margin-bottom: 10px; }
+        .app-stores img { height: 40px; width: auto; transition: opacity 0.3s ease; }
+        .app-stores img:hover { opacity: 0.8; }
+        .social-links a { color: var(--color-text-primary); font-size: 1.8rem; margin-right: 15px; transition: color 0.3s ease; display: inline-block; }
+        .social-links a:hover { color: var(--color-primary); animation: bounce 0.8s ease; }
+        .contact-info p { margin-bottom: 10px; color: var(--color-text-secondary); line-height: 1.6; display: flex; align-items: center; gap: 10px; }
+
+        .signup-banner {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+            background-size: cover;
+            background-position: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .signup-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-primary);
+        }
+        .signup-banner p {
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+        }
+
+        .signup-form-container {
+            background-color: var(--color-surface);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            max-width: 900px;
+            margin: -80px auto 0 auto;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .form-section-title {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .form-label {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: var(--color-background);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            color: var(--color-text-primary);
+        }
+        .form-control::placeholder {
+            color: #6c757d;
+        }
+
+        .form-control.is-invalid, .form-select.is-invalid {
+            border-color: var(--color-danger);
+        }
+        .invalid-feedback {
+            color: var(--color-danger);
+            font-weight: 500;
+        }
+
+        .form-check-label {
+            color: var(--color-text-secondary);
+        }
+        .form-check-input:checked {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        .form-check-input.is-invalid {
+            border-color: var(--color-danger);
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .submit-btn-container .btn {
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+
+        @media (max-width: 992px) {
+            .footer { flex-direction: column; text-align: center; }
+            .footer-col { width: 100%; max-width: 400px; margin: 0 auto; }
+            .app-download, .social-links, .contact-info { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="image/logo.png" alt="Logo Megaforce" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="entrenamiento.html">Entrenamiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="instalaciones.html">Instalaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="nutricion.html">Nutrición</a></li>
+                        <li class="nav-item"><a class="nav-link" href="equipamiento.html">Equipamiento</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="inscribirse.html" class="btn btn-primary me-2 active">Inscribirse</a>
+                        <a href="acceder.html" class="btn btn-secondary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="signup-banner">
+            <h1>Formulario de Inscripción</h1>
+            <p>Estás a un paso de empezar tu transformación. Completa tus datos.</p>
+        </section>
+
+        <div class="container">
+            <div class="signup-form-container">
+                <form id="signupForm" class="needs-validation" novalidate>
+
+                    <h2 class="form-section-title">Datos Personales</h2>
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Ej: Juan" required>
+                            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Ej: Pérez García" required>
+                             <div class="invalid-feedback">Por favor, ingresa tus apellidos.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="dni" class="form-label">DNI</label>
+                            <input type="text" class="form-control" id="dni" maxlength="8" placeholder="Tu número de DNI" required>
+                             <div class="invalid-feedback">Por favor, ingresa un DNI válido.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="birthDate" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="birthDate" required>
+                             <div class="invalid-feedback">Por favor, ingresa tu fecha de nacimiento.</div>
+                        </div>
+                         <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Celular</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="987654321" required>
+                             <div class="invalid-feedback">Por favor, ingresa tu número de celular.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="tu.correo@ejemplo.com" required>
+                             <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" placeholder="Crea una contraseña segura" required minlength="8">
+                             <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Vuelve a escribir la contraseña" required>
+                             <div class="invalid-feedback">Las contraseñas no coinciden o el campo está vacío.</div>
+                        </div>
+                    </div>
+
+                    <h2 class="form-section-title mt-4">Plan y Sede</h2>
+                     <div class="row mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="plan" class="form-label">Elige tu Plan</label>
+                            <select class="form-select" id="plan" required>
+                                <option value="" disabled selected>Selecciona un plan...</option>
+                                <option value="mega">Plan Mega</option>
+                                <option value="full">Plan Full</option>
+                                <option value="premium">Plan Premium</option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecciona un plan.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Elige tu Sede</label>
+                            <select class="form-select" id="location" required>
+                                <option value="" disabled selected>Selecciona una sede...</option>
+                                <option>La Molina</option>
+                                <option>Miraflores</option>
+                                <option>San Isidro</option>
+                                <option>San Miguel</option>
+                                <option>Surco</option>
+                                <option>Barranco</option>
+                                <option>Los Olivos</option>
+                                <option>Jesús María</option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecciona una sede.</div>
+                        </div>
+                    </div>
+
+                    <h2 class="form-section-title mt-4">Método de Pago</h2>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card" required>
+                            <label class="form-check-label" for="paymentCard">Tarjeta de Crédito / Débito</label>
+                        </div>
+                         <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentYape" value="yape" required>
+                            <label class="form-check-label" for="paymentYape">Yape / Plin</label>
+                        </div>
+                         <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentTransfer" value="transfer" required>
+                            <label class="form-check-label" for="paymentTransfer">Transferencia Bancaria</label>
+                        </div>
+                    </div>
+
+                     <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Acepto los <a href="#" class="text-warning">Términos y Condiciones</a> y la <a href="#" class="text-warning">Política de Privacidad</a>.
+                        </label>
+                        <div class="invalid-feedback">Debes aceptar los términos y condiciones.</div>
+                    </div>
+
+                    <div class="submit-btn-container">
+                        <button class="btn btn-primary" type="submit">Finalizar Inscripción</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-col">
+            <h4>Descarga la App</h4>
+            <div class="app-download">
+                <div class="qr-code">
+                    <img src="image/qrdescarga.png" alt="QR Code para descargar la app">
+                </div>
+                <div class="app-stores">
+                    <a href="#"><img src="image/Google_Play_Store_badge_EN.svg.webp" alt="Disponible en Google Play"></a>
+                    <a href="#"><img src="image/AppStore.png" alt="Descargar en el App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Av. Principal 123, Lima, Perú</p>
+                <p><i class="fas fa-envelope"></i> Email: info@gymmegaforce.com.pe</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +51 123 456 789</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        (function () {
+          'use strict'
+
+          var form = document.getElementById('signupForm');
+          var password = document.getElementById('password');
+          var confirmPassword = document.getElementById('confirmPassword');
+
+          function checkPasswords() {
+              if (password.value !== confirmPassword.value) {
+
+                  confirmPassword.setCustomValidity("Las contraseñas no coinciden.");
+              } else {
+
+                  confirmPassword.setCustomValidity('');
+              }
+          }
+
+          form.addEventListener('submit', function (event) {
+
+            checkPasswords();
+
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          }, false);
+
+          password.addEventListener('change', checkPasswords);
+      confirmPassword.addEventListener('keyup', checkPasswords);
+        })();
+    </script>
+</body>
+</html>

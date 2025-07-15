@@ -1,0 +1,348 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento - Gym Megaforce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --color-background: #121212;
+            --color-surface: #1E1E1E;
+            --color-primary: #FFD700;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #AAAAAA;
+            --color-border: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .navbar { background-color: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 1rem 0; }
+        .navbar .nav-link { font-weight: 600; color: var(--color-text-secondary); transition: color 0.3s ease; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--color-text-primary) !important; }
+
+        .btn { padding: 10px 22px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; text-align: center; }
+        .btn-primary { background-color: var(--color-primary); color: var(--color-background); border: 1px solid var(--color-primary); }
+        .btn-primary:hover { filter: brightness(1.1); transform: scale(1.05); }
+        .btn-secondary { background-color: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); }
+        .btn-secondary:hover { background-color: var(--color-primary); color: var(--color-background); }
+
+        .footer { background-color: var(--color-surface); padding: 50px 5%; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h4 { margin-bottom: 20px; text-transform: uppercase; color: var(--color-primary); font-weight: 700; }
+        .app-download { display: flex; align-items: center; gap: 20px; }
+        .qr-code img { width: 100px; height: 100px; border-radius: 8px; }
+        .app-stores a { display: block; margin-bottom: 10px; }
+        .app-stores img { height: 40px; width: auto; transition: opacity 0.3s ease; }
+        .app-stores img:hover { opacity: 0.8; }
+        .social-links a { color: var(--color-text-primary); font-size: 1.8rem; margin-right: 15px; transition: color 0.3s ease; display: inline-block; }
+        .social-links a:hover { color: var(--color-primary); animation: bounce 0.8s ease; }
+        .contact-info p { margin-bottom: 10px; color: var(--color-text-secondary); line-height: 1.6; display: flex; align-items: center; gap: 10px; }
+
+        .training-banner {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('image/Gemini_Generated_Image_r40utur40utur40u-min.png');
+            background-size: cover;
+            background-position: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .training-banner h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid var(--color-border);
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--color-text-secondary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 15px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--color-text-primary);
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--color-primary);
+            background-color: transparent;
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .tab-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .tab-pane {
+            padding: 20px 0;
+        }
+
+        .training-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .training-image {
+            flex-basis: 50%;
+        }
+        .training-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .training-details {
+            flex-basis: 50%;
+        }
+        
+        .training-details h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .training-details p {
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 25px;
+        }
+        
+        .training-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .training-details ul li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .training-details ul li::before {
+            content: '\f058'; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--color-primary);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+
+        @media (max-width: 992px) {
+            .footer { flex-direction: column; text-align: center; }
+            .footer-col { width: 100%; max-width: 400px; margin: 0 auto; }
+            .app-download, .social-links, .contact-info { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .training-content {
+                flex-direction: column;
+            }
+            .training-image {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="image/logo.png" alt="Logo Megaforce" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" href="entrenamiento.html">Entrenamiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="instalaciones.html">Instalaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="nutricion.html">Nutrición</a></li>
+                        <li class="nav-item"><a class="nav-link" href="equipamiento.html">Equipamiento</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="inscribirse.html" class="btn btn-primary me-2">Inscribirse</a>
+                        <a href="acceder.html" class="btn btn-secondary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="training-banner">
+            <h1>Modalidades de Entrenamiento</h1>
+        </section>
+
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="musculacion-tab" data-bs-toggle="tab" data-bs-target="#musculacion-pane" type="button" role="tab" aria-controls="musculacion-pane" aria-selected="true">Musculación</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cardio-tab" data-bs-toggle="tab" data-bs-target="#cardio-pane" type="button" role="tab" aria-controls="cardio-pane" aria-selected="false">Cardio y Cycling</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="funcional-tab" data-bs-toggle="tab" data-bs-target="#funcional-pane" type="button" role="tab" aria-controls="funcional-pane" aria-selected="false">Funcional</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cross-tab" data-bs-toggle="tab" data-bs-target="#cross-pane" type="button" role="tab" aria-controls="cross-pane" aria-selected="false">Cross Mega</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="musculacion-pane" role="tabpanel" aria-labelledby="musculacion-tab" tabindex="0">
+                    <div class="training-content">
+                        <div class="training-details">
+                            <h3>Musculación y Fuerza</h3>
+                            <p>Ideal para quienes buscan aumentar su fuerza, construir masa muscular y definir su físico. Contamos con equipamiento de primer nivel y la asesoría de nuestros entrenadores para que alcances tus objetivos de forma segura.</p>
+                            <ul>
+                                <li>Aumento de fuerza y potencia.</li>
+                                <li>Hipertrofia muscular garantizada.</li>
+                                <li>Mejora de la postura y salud ósea.</li>
+                                <li>Rutinas personalizadas por nuestros coaches.</li>
+                            </ul>
+                        </div>
+                        <div class="training-image">
+                            <img src="image/Gemini_Generated_Image_qgg8uaqgg8uaqgg8-min.png" alt="Entrenamiento de musculación">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="cardio-pane" role="tabpanel" aria-labelledby="cardio-tab" tabindex="0">
+                     <div class="training-content">
+                        <div class="training-details">
+                            <h3>Cardio y Cycling</h3>
+                            <p>Mejora tu resistencia y salud cardiovascular en nuestras clases de cycling llenas de energía o en nuestra completa zona de cardio. Quema calorías, reduce el estrés y fortalece tu corazón al ritmo de la mejor música.</p>
+                            <ul>
+                                <li>Mejora de la capacidad pulmonar y cardiovascular.</li>
+                                <li>Alta quema de calorías.</li>
+                                <li>Reducción del estrés y mejora del ánimo.</li>
+                                <li>Clases de Cycling con instructores certificados.</li>
+                            </ul>
+                        </div>
+                        <div class="training-image">
+                            <img src="image/Gemini_Generated_Image_j5r2aaj5r2aaj5r2-min.png" alt="Clase de Cycling">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="funcional-pane" role="tabpanel" aria-labelledby="funcional-tab" tabindex="0">
+                    <div class="training-content">
+                        <div class="training-details">
+                            <h3>Entrenamiento Funcional</h3>
+                            <p>Entrena movimientos, no solo músculos. El entrenamiento funcional mejora tu agilidad, coordinación, equilibrio y potencia a través de ejercicios que simulan movimientos de la vida cotidiana y el deporte.</p>
+                            <ul>
+                                <li>Mejora de la agilidad y coordinación.</li>
+                                <li>Fortalecimiento del core (zona media).</li>
+                                <li>Prevención de lesiones.</li>
+                                <li>Entrenamientos dinámicos y divertidos.</li>
+                            </ul>
+                        </div>
+                        <div class="training-image">
+                            <img src="image/Gemini_Generated_Image_jqmet2jqmet2jqme-min.png" alt="Entrenamiento funcional">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="cross-pane" role="tabpanel" aria-labelledby="cross-tab" tabindex="0">
+                     <div class="training-content">
+                        <div class="training-details">
+                            <h3>Cross Mega</h3>
+                            <p>Lleva tu condición física al límite. Cross Mega es nuestro programa de acondicionamiento de alta intensidad que combina levantamiento de pesas, gimnasia y ejercicios metabólicos para un desarrollo físico completo.</p>
+                            <ul>
+                                <li>Desarrollo de las 10 capacidades físicas.</li>
+                                <li>Resultados visibles en poco tiempo.</li>
+                                <li>Comunidad fuerte y motivadora.</li>
+                                <li>Supera tus límites en cada WOD (Workout of the Day).</li>
+                            </ul>
+                        </div>
+                        <div class="training-image">
+                            <img src="image/Gemini_Generated_Image_oatulloatulloatu-min.png" alt="Entrenamiento de Cross Mega">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-col">
+            <h4>Descarga la App</h4>
+            <div class="app-download">
+                <div class="qr-code">
+                    <img src="image/qrdescarga.png" alt="QR Code para descargar la app">
+                </div>
+                <div class="app-stores">
+                    <a href="#"><img src="image/Google_Play_Store_badge_EN.svg.webp" alt="Disponible en Google Play"></a>
+                    <a href="#"><img src="image/AppStore.png" alt="Descargar en el App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Av. Principal 123, Lima, Perú</p>
+                <p><i class="fas fa-envelope"></i> Email: info@gymmegaforce.com.pe</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +51 123 456 789</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
